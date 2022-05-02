@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_PASSWORD: ${DB_PASS}
+  api:
+    build: .
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    restart: always
+    container_name: "warehouse-api"
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      DB_HOST: ${DB_HOST}
+volumes:
+  postgres-data:
