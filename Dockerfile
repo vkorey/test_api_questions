@@ -1,4 +1,4 @@
-FROM python:3.8.1-alpine
+FROM python
 WORKDIR /app
 COPY requirements.txt .
 RUN python3 -m pip install --upgrade pip \

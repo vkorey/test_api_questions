@@ -1,13 +1,28 @@
 from os import environ
 
-from databases import Database
+from sqlalchemy import create_engine
+from sqlalchemy.orm import declarative_base, sessionmaker
 
-"""DB_USER = environ.get('DB_USER', 'root')
-DB_PASSWORD = environ.get('DB_PASS', 'root')
-DB_HOST = environ.get('DB_HOST', 'localhost')
-DB_NAME = environ.get('DB_NAME', 'questions')"""
-SQLALCHEMY_DATABASE_URI  = (
-    "postgresql://root:root@localhost:5432/questions"
+DB_USER = environ.get('DB_USER', 'root')
+DB_PASS = environ.get('DB_PASS', 'root')
+DB_HOST = environ.get('DB_HOST', 'db')
+DB_NAME = environ.get('DB_NAME', 'questions')
+SQLALCHEMY_DATABASE_URL = (
+    f"postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:5432/{DB_NAME}"
 )
 
-database = Database(SQLALCHEMY_DATABASE_URI)
+engine = create_engine(
+    SQLALCHEMY_DATABASE_URL,
+)
+
+Session = sessionmaker(autocommit=True, autoflush=True, bind=engine)
+
+Base = declarative_base()
+
+
+def get_db():
+    db = Session()
+    try:
+        yield db
+    finally:
+        db.close()
