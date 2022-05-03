@@ -1,10 +1,9 @@
 
 from fastapi import APIRouter, Depends
 
+from app.db import Session, get_db
 from app.schemas import Question
 from app.utils import check_and_store, get_questions
-
-from .db import Session, get_db
 
 router = APIRouter()
 
