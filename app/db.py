@@ -1,12 +1,14 @@
-from os import environ
-
+from environs import Env
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-DB_USER = environ.get('DB_USER', 'root')
-DB_PASS = environ.get('DB_PASS', 'root')
-DB_HOST = environ.get('DB_HOST', 'db')
-DB_NAME = environ.get('DB_NAME', 'questions')
+env = Env()
+env.read_env()
+
+DB_USER = env('DB_USER')
+DB_PASS = env('DB_PASS')
+DB_HOST = env('DB_HOST')
+DB_NAME = env('DB_NAME')
 SQLALCHEMY_DATABASE_URL = (
     f"postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:5432/{DB_NAME}"
 )
