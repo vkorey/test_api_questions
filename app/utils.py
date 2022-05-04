@@ -37,6 +37,7 @@ def save_question(
         created_at=created_at
     )
     db.add(q)
+    db.commit()
 
 
 def check_and_store(response: dict, amount: int, db):
