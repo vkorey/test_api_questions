@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 
 from app.db import get_db
 from app.schemas import QuestionBase
-from app.utils import check_and_store, get_questions
+from app.utils import check_and_store, get_last_question, get_questions
 
 router = APIRouter()
 
@@ -13,6 +13,8 @@ router = APIRouter()
 async def question(
     question: QuestionBase,
     db: Session = Depends(get_db)
-):
+):  
+    result = get_last_question(db)
     response = get_questions(question.amount)
     check_and_store(response, question.amount, db)
+    return result

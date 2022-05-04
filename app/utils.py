@@ -1,4 +1,6 @@
 
+from tkinter import N
+
 import requests
 
 from app.models import Question
@@ -57,3 +59,10 @@ def check_and_store(response: dict, amount: int, db):
         else:
             new_response = get_questions(1)
             check_and_store(new_response, 1, db)
+
+
+def get_last_question(db):
+    obj = db.query(Question).order_by(Question.id.desc()).first()
+    if not obj:
+        return {}
+    return {'id':obj.question_id, 'question':obj.question_text, 'answer':obj.answer, 'created_at':obj.created_at}
