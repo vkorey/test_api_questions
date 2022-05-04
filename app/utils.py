@@ -1,14 +1,13 @@
 
-from tkinter import N
-
 import requests
+from sqlalchemy.orm import Session
 
 from app.models import Question
 
 
 def get_questions(amount: int):
-    headers = {}
-    payload = {}
+    headers: dict = {}
+    payload: dict = {}
     url = "https://jservice.io/api/random?count=" + str(amount)
     response = requests.request("GET", url, headers=headers, data=payload)
     return response.json()
@@ -16,7 +15,7 @@ def get_questions(amount: int):
 
 def is_unique_question(
     question_id: int,
-    db
+    db: Session
 ):
     question = db.query(Question).filter(
         Question.question_id == question_id
@@ -26,7 +25,7 @@ def is_unique_question(
 
 
 def save_question(
-    db,
+    db: Session,
     question_id: int,
     question: str,
     answer: str,
@@ -42,7 +41,7 @@ def save_question(
     db.commit()
 
 
-def check_and_store(response: dict, amount: int, db):
+def check_and_store(response: dict, amount: int, db: Session):
     for question in range(amount):
         if is_unique_question(response[question]['id'], db):
             question_id = response[question]['id']
@@ -61,7 +60,7 @@ def check_and_store(response: dict, amount: int, db):
             check_and_store(new_response, 1, db)
 
 
-def get_last_question(db):
+def get_last_question(db: Session):
     obj = db.query(Question).order_by(Question.id.desc()).first()
     if not obj:
         return {}

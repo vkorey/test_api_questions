@@ -35,5 +35,4 @@ DB_PASS="root"
 DB_HOST="db"
 DB_PORT=5432
 DB_NAME="questions"
-
 ```
