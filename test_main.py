@@ -1,4 +1,3 @@
-import pytest
 from environs import Env
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
