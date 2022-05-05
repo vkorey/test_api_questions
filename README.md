@@ -36,3 +36,5 @@ DB_HOST="db"
 DB_PORT=5432
 DB_NAME="questions"
 ```
+
+#### Для тестирования API в проекте есть файл с коллекцией запросов Postman - test_api_questions.postman_collection.json

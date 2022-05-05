@@ -1,0 +1,52 @@
+{
+	"info": {
+		"_postman_id": "dc714597-e8df-4615-b7ed-2718df4543ef",
+		"name": "Test_api_questions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "127.0.0.1:8000/question",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"amount\":17}"
+				},
+				"url": {
+					"raw": "127.0.0.1:8000/question",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"question"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "101",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
