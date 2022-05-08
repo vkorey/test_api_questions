@@ -9,8 +9,9 @@ DB_USER = env("DB_USER")
 DB_PASS = env("DB_PASS")
 DB_HOST = env("DB_HOST")
 DB_NAME = env("DB_NAME")
-SQLALCHEMY_DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:5432/{DB_NAME}"
-
+SQLALCHEMY_DATABASE_URL = (
+    f"postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:5432/{DB_NAME}"
+)
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL,
 )
