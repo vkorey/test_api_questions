@@ -9,7 +9,7 @@ from app.utils import get_questions
 router = APIRouter()
 
 
-@router.post("/question")
+@router.post("/question", tags=["question"])
 async def question(question: QuestionBase, db: Session = Depends(get_db)):
     pers = DButils(db)
     result = pers.get_last_question()

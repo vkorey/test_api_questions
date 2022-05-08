@@ -6,6 +6,17 @@ from app.routers import router
 
 models.Base.metadata.create_all(bind=engine)
 
-app = FastAPI()
+description = """
+API Questions
+
+## question
+
+Получить последний сохранненый вопрос из базы данных
+"""
+
+app = FastAPI(
+    title="API Questions",
+    description=description,
+)
 
 app.include_router(router)
